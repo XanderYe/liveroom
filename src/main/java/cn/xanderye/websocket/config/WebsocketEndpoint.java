@@ -100,4 +100,8 @@ public class WebsocketEndpoint extends TextWebSocketHandler {
             }
         }
     }
+
+    public static CopyOnWriteArraySet<WebSocketSession> getUsers() {
+        return users;
+    }
 }
