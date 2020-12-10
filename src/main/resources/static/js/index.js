@@ -1,6 +1,6 @@
 var liveUrl = "http://127.0.0.1:8079/live/test.m3u8";
-var dplayerUrl = "http://127.0.0.1:8080/";
-var wsUrl = "ws://127.0.0.1:8080/websocket/init";
+var dplayerUrl = "http://" + location.hostname + ":" + location.port + "/";
+var wsUrl = "ws://" + location.hostname + ":" + location.port + "/websocket/init";
 
 $(function () {
   var ws = new Websocket(wsUrl, function (event) {
