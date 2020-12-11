@@ -4,11 +4,6 @@
 
 基于Dplayer和Websocket的私人直播间，匿名观看，支持弹幕发送，需要自行搭建流媒体服务
 
-## 使用说明
-
-1. 必须在宿主机使用root账户启动服务
-2. 每次操作后都会生成备份文件，如果出现问题请手动恢复，在 /var/lib/docker/containers/容器id/ 下，备份文件为 config.v2.json.bak 和 hostconfig.json.bak
-
 ## 部署方法
 
 ### 部署流媒体服务
