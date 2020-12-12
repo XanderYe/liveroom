@@ -46,10 +46,21 @@ $(function () {
   });
 
   function setDanmu(danmu) {
+    var type = "right";
+    switch (danmu.type) {
+      case 1:
+        type = "top";
+        break;
+      case 2:
+        type = "bottom";
+        break;
+      default:
+        break;
+    }
     dp.danmaku.draw({
       text: danmu.text,
       color: danmu.color,
-      type: 'right',
+      type: type,
     });
   }
 

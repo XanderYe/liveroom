@@ -18,3 +18,10 @@ html, body {
 .dplayer-bezel {
     display: none !important;
 }
+.dplayer-danmaku-top {
+    left: 0;
+}
+.dplayer-danmaku-bottom {
+    left: 0;
+    bottom: 40px !important;
+}
