@@ -15,6 +15,14 @@ html, body {
     margin: 0 auto;
 }
 
+#history {
+    width: 960px;
+    margin: 0 auto;
+}
+#history p {
+    text-align: left;
+}
+
 .dplayer-bezel {
     display: none !important;
 }

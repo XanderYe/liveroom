@@ -13,6 +13,7 @@ $(function () {
     }
     if (danmu) {
       setDanmu(danmu);
+      addHistory(danmu);
     }
   })
 
@@ -45,6 +46,32 @@ $(function () {
     },
   });
 
+  $("#danmuText").unbind().bind("keydown", function (event) {
+    if (event.key === "Enter") {
+      sendDanmu();
+    }
+  });
+
+  $("#sendDanmu").unbind().bind("click", function () {
+    sendDanmu();
+  })
+
+  function sendDanmu() {
+    var text = $("#danmuText").val();
+    if (!text) {
+      alert("请输入弹幕");
+      return;
+    }
+    dp.danmaku.send(
+      {
+        text: text,
+        color: '#fff',
+        type: 'right'
+      }
+    );
+    $("#danmuText").val("");
+  }
+
   function setDanmu(danmu) {
     var type = "right";
     switch (danmu.type) {
@@ -64,4 +91,21 @@ $(function () {
     });
   }
 
+  function addHistory(danmu) {
+    var text = $("<div>").text(danmu.text).html();
+    var p = $("<p></p>");
+    p.html(dateFormat(new Date()) + "　　:　　" + text);
+    p.css("color", "#" + parseInt(danmu.color, 10).toString(16));
+    $("#first-line").before(p);
+  }
+
+  function dateFormat(date) {
+    var Y = date.getFullYear();
+    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1);
+    var D = (date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate());
+    var H = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    return [Y, M, D].join("-") + " " + [H, m, s].join(":");
+  }
 })
