@@ -95,7 +95,8 @@ $(function () {
     var text = $("<div>").text(danmu.text).html();
     var p = $("<p></p>");
     p.html(dateFormat(new Date()) + "　　:　　" + text);
-    p.css("color", "#" + parseInt(danmu.color, 10).toString(16));
+    var color = danmu.color === 16777215 ? "000" : danmu.color.toString(16);
+    p.css("color", "#" + color);
     $("#first-line").before(p);
   }
 
