@@ -11,7 +11,7 @@ $(function () {
   liveUrl = liveUrl.replace("${key}", key);
 
   document.title = "性感" + username + "在线直播";
-  $("#container h1").eq(0).text(username);
+  $("#container h1").eq(0).text("欢迎来到" + username + "的直播间");
 
 
   var ws = new Websocket(wsUrl, function (event) {
