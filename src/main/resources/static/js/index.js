@@ -1,19 +1,36 @@
-var liveUrl = "http://127.0.0.1:8079/live/test.m3u8";
-var dplayerUrl = "http://" + location.hostname + ":" + location.port + "/";
-var wsUrl = "ws://" + location.hostname + ":" + location.port + "/websocket/init";
-
 $(function () {
+
+  var urlKey = getUrlParam("key");
+  var urlUsername = getUrlParam("username");
+  if (urlKey) {
+    key = urlKey;
+  }
+  if (urlUsername) {
+    username = urlUsername;
+  }
+  liveUrl = liveUrl.replace("${key}", key);
+
+  document.title = "性感" + username + "在线直播";
+  $("#container h1").eq(0).text(username);
+
+
   var ws = new Websocket(wsUrl, function (event) {
     var data = event.data;
-    var danmu;
+    var danmuData;
     try {
-      danmu = JSON.parse(data).commandData;
+      danmuData = JSON.parse(data).commandData;
     } catch (e) {
-      danmu = null;
+      danmuData = null;
     }
-    if (danmu) {
-      setDanmu(danmu);
-      addHistory(danmu);
+    if (danmuData) {
+      // 非同一直播间
+      if (danmuData.key !== key) {
+        return;
+      }
+      if (danmuData.data) {
+        setDanmu(danmuData.data);
+        addHistory(danmuData.data);
+      }
     }
   })
 
@@ -37,7 +54,11 @@ $(function () {
         }
       },
       send: function (option, callback) {
-        ws.send(2, option.data);
+        var danmuData = {
+          key: key,
+          data: option.data
+        }
+        ws.send(2, danmuData);
         if (callback) {
           callback();
         }
@@ -108,5 +129,11 @@ $(function () {
     var m = date.getMinutes();
     var s = date.getSeconds();
     return [Y, M, D].join("-") + " " + [H, m, s].join(":");
+  }
+
+  function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
   }
 })
