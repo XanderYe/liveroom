@@ -6,7 +6,7 @@ $(function () {
     key = urlKey;
   }
   if (urlUsername) {
-    username = urlUsername;
+    username = decodeURI(urlUsername);
   }
   liveUrl = liveUrl.replace("${key}", key);
 
