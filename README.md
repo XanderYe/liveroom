@@ -22,9 +22,7 @@
 liveUrl中的ip为流媒体服务ip<br/>
 key为串流密钥<br/>
 username为直播间名称<br/>
-支持通过url参数修改key和username，例如`http://localhost:8080?key=串流密钥&username=直播间名称`<br/>
-端口为流媒体服务http的端口，对应上面80映射的端口<br/>
-test为自定义的串流密钥，和推流的一致
+支持通过url参数修改key和username，例如`http://localhost:8078?key=串流密钥&username=直播间名称`<br/>
 2. 执行mvn clean install，打包jar
 3. 部署直播间后台
 ```
